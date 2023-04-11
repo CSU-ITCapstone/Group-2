@@ -1,0 +1,25 @@
+﻿@page
+@using System.Data.SqlClient;
+
+@{ 
+    try
+    {
+        String id = Request.Query["id"];
+        String connectionString = "Server=18.221.187.185;Initial Catalog=Printers;User ID=mgowan;Password=SecurePassword!123;MultipleActiveResultSets=true";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            String sql = "DELETE FROM dbo.Printers WHERE ID=@id";
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+
+    catch (Exception ex)
+    { }
+    Response.Redirect("/Printers/Index");
+}

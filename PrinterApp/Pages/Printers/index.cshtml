@@ -1,0 +1,89 @@
+﻿@page
+@model PrinterApp.Pages.Printers.IndexModel
+@{
+}
+
+<br />
+<h2>SGMC Printer List</h2>
+<a class='btn btn-primary btn-sm' href='/Printers/Create'>New Printer</a>
+@*<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>*@
+<table class="table">
+    <thead>
+        @*<a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+           asp-route-currentFilter="@Model.CurrentFilter">
+            @Html.DisplayNameFor(model => model.listPrinters[0].id)
+        </a>
+        <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
+           asp-route-currentFilter="@Model.CurrentFilter">
+            @Html.DisplayNameFor(model => model.listPrinters[0].location)
+        </a>*@
+        <tr>
+            <th>ID</th>
+            <th>Asset No.</th>
+            <th>IP Address</th>
+            <th>MAC</th>
+            <th>Host DNS Name</th>
+            <th>Location</th>
+            <th>Type</th>
+            <th>Product Model</th>
+            <th>Serial Number</th>
+            <th>MFG Date</th>
+            <th>Notes</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listPrinters)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.assetno</td>
+                <td>@item.ipaddress</td>
+                <td>@item.mac</td>
+                <td>@item.hostdnsname</td>
+                <td>@item.location</td>
+                <td>@item.type</td>
+                <td>@item.productmodel</td>
+                <td>@item.serialnumber</td>
+                <td>@item.mfgdate</td>
+                <td>@item.notes</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Printers/Edit?id=@item.id">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="/Printers/Delete?id=@item.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@*@{
+ var prevDisabled = !Model.listPrinters.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.listPrinters.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.listPrinters.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.listPrinters.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>*@
+

@@ -1,0 +1,98 @@
+﻿@page
+@model PrinterApp.Pages.Printers.createModel
+@{
+}
+
+<br />
+<h2>New Printer</h2>
+
+@if  (Model.errorMessage.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.errorMessage</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' arial-label='Close'></button>
+    </div>
+}
+
+<form method="POST">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Asset</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="asset" value="@Model.printerList.assetno" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">IP Address</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="ipaddress" value="@Model.printerList.ipaddress" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">MAC</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="mac" value="@Model.printerList.mac" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">DNS Name</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="hostdnsname" value="@Model.printerList.hostdnsname" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Location</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="location" value="@Model.printerList.location" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Type</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="type" value="@Model.printerList.type" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Product Model</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="productmodel" value="@Model.printerList.productmodel" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Serial Number</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="serialnumber" value="@Model.printerList.serialnumber" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">MFG Date</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="mfgdate" value="@Model.printerList.mfgdate" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Notes</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="notes" value="@Model.printerList.notes" />
+        </div>
+    </div>
+
+    @if (Model.successMessage.Length > 0)
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class='alert alert-success alert-dismissible show' role='alert'>
+                    <strong>@Model.successMessage</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <div class="col-sm-3 d-grid">
+        <a class='btn btn-outline-primary' href='/' role='button'>Cancel</a>
+    </div>
+</form>
