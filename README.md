@@ -1,5 +1,6 @@
 # Group-2 Project: Printer Application
-The purpose of this project is to provide an organized table that retrieves printer information from a SQL database.
+The purpose of this project is to pull printer information from a SQL database into a table.
+
 
 ## Description
 The Printer Management Portal is a web-based application designed to streamline printer administration by pulling records from an SQL database and displaying them on a web page. The portal will offer an intuitive interface for users to add, update, and delete printer records such as IP addresses, MAC addresses, drivers, and more. By centralizing printer information management, the website aims to enhance productivity, improve organization, and simplify the maintenance process for businesses and IT professionals.
