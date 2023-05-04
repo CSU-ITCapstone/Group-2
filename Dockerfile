@@ -13,8 +13,8 @@ WORKDIR /app/PrinterApp
 # Restore dependencies
 RUN dotnet restore
 
-# Build the application
-RUN dotnet build -c Release -o out
+# Publish the application
+RUN dotnet publish -c Release -o out
 
 # Use the official Microsoft .NET 5.0 Runtime image as the base image for the runtime environment
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
