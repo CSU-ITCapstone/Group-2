@@ -19,7 +19,7 @@ The Printer Management Portal is a web-based application designed to streamline 
 * Run the program by selecting the IIS Express green arrow in Visual Studio
 
 ### OR
-* Go to [Printer App Login Page](https://printerapp20230504135825.azurewebsites.net/login)
+* Go to [Printer Application Login](https://printerapp20230504135825.azurewebsites.net/login)
 * Username: user1@example.com
 * Password: password1
 
