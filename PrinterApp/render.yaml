@@ -1,0 +1,10 @@
+﻿services:
+  - type: web
+    name: your-app-name
+    env: dotnet
+    buildCommand: dotnet publish -c Release -o ./output
+    startCommand: dotnet ./output/YourAppName.dll
+    publishDir: ./output
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
