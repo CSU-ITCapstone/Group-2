@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: your-app-name
+    name: Group 2 Printer App
     env: dotnet
     buildCommand: dotnet publish -c Release -o ./output
-    startCommand: dotnet ./output/YourAppName.dll
+    startCommand: dotnet ./output/PrinterApp.dll
     publishDir: ./output
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
