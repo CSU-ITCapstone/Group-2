@@ -12,6 +12,12 @@ namespace PrinterApp.Pages
 {
     public class LoginModel : PageModel
     {
+        [BindProperty]
+        public string Email { get; set; }
+
+        [BindProperty]
+        public string Password { get; set; }
+
         private readonly IConfiguration _configuration;
 
         public LoginModel(IConfiguration configuration)
@@ -33,33 +39,36 @@ namespace PrinterApp.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
             {
+                ModelState.AddModelError("InvalidCredentials", "Email and password are required.");
                 return Page();
             }
 
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("PrinterAppContext")))
             {
                 await connection.OpenAsync();
-                using (SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM [Printers].[dbo].[UserLogins] WHERE Email = @Email AND Password = @Password", connection))
+
+                using (SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM UserLogins WHERE Email = @Email AND Password = @Password", connection))
                 {
-                    command.Parameters.AddWithValue("@Email", Input.Username);
-                    command.Parameters.AddWithValue("@Password", Input.Password);
+                    command.Parameters.AddWithValue("@Email", Email);
+                    command.Parameters.AddWithValue("@Password", Password);
+
                     var count = (int)await command.ExecuteScalarAsync();
 
                     if (count > 0)
                     {
-                        // Login successful, redirect to the Index page of the Printers group.
-                        return RedirectToPage("/Printers/index");
+                        // Authentication successful, redirect to the Printers/Index page
+                        return RedirectToPage("/Printers/Index");
                     }
                     else
                     {
-                        // Login failed.
-                        ModelState.AddModelError("", "Invalid username or password.");
+                        ModelState.AddModelError("InvalidCredentials", "Invalid email or password.");
                         return Page();
                     }
                 }
             }
         }
+
     }
 }
