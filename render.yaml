@@ -4,3 +4,4 @@ services:
     env: docker
     repo: https://github.com/CSU-ITCapstone/Group-2.git
     branch: main
+    plan: free
