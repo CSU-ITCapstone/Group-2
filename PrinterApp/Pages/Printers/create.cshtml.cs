@@ -11,8 +11,10 @@ namespace PrinterApp.Pages.Printers
     public class createModel : PageModel
     {
         public PrinterList printerList = new PrinterList();
-        public String errorMessage = "";
-        public String successMessage = "";
+
+        // Add [BindProperty] attribute and make the properties public
+        [BindProperty]
+        public string errorMessage { get; set; } = "";
         public void OnGet()
         {
         }
@@ -75,7 +77,7 @@ namespace PrinterApp.Pages.Printers
             }
 
             printerList.assetno = ""; printerList.ipaddress = ""; printerList.mac = ""; printerList.hostdnsname = ""; printerList.location = ""; printerList.type = ""; printerList.productmodel = ""; printerList.serialnumber = ""; printerList.mfgdate = ""; printerList.notes = "";
-            successMessage = "New Printer Added Successfully";
+            TempData["SuccessMessage"] = "New Printer Added Successfully";
 
             Response.Redirect("/Printers/Index");
         }
