@@ -2,7 +2,7 @@ services:
   - type: web
     name: Group 2 Printer App
     env: dotnet
-    buildCommand: dotnet publish -c Release -o ./output
+    buildCommand: dotnet publish --configuration Release --output out
     startCommand: dotnet ./output/PrinterApp.dll
     publishDir: ./output
     envVars:
