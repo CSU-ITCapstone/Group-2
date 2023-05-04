@@ -1,10 +1,8 @@
 services:
   - type: web
-    name: Group 2 Printer App
-    env: dotnet
+    name: printer-app
+    env: docker
+    repo: <YOUR_GITHUB_REPO_URL>
+    branch: main
     buildCommand: dotnet publish --configuration Release --output out
-    startCommand: dotnet ./output/PrinterApp.dll
-    publishDir: ./output
-    envVars:
-      - key: ASPNETCORE_ENVIRONMENT
-        value: Production
+    startCommand: dotnet out/PrinterApp.dll
