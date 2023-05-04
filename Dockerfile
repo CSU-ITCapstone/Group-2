@@ -1,16 +1,23 @@
-FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build-env
+# Use the official Microsoft .NET SDK image as the base image
+FROM mcr.microsoft.com/dotnet/sdk:5.0
+
+# Set the working directory to the app folder
 WORKDIR /app
 
-# Copy csproj and restore dependencies
-COPY *.csproj ./
+# Copy the .csproj file into the working directory
+COPY Group-2/PrinterApp/PrinterApp.csproj .
+
+# Run dotnet restore
 RUN dotnet restore
 
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
+# Copy the rest of the application code
+COPY . .
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:3.1
-WORKDIR /app
-COPY --from=build-env /app/out .
+# Build the application
+RUN dotnet build --no-restore -c Release -o /app/out
+
+# Set the working directory for the runtime image
+WORKDIR /app/out
+
+# Set the entry point for the container
 ENTRYPOINT ["dotnet", "PrinterApp.dll"]
