@@ -23,10 +23,7 @@ The Printer Management Portal is a web-based application designed to streamline 
   ```
 
 ## Help
-Any advise for common problems or issues.
-``` 
-  command to run if program contains helper info
-  ```
+Make sure you install the latest .Net Framework in order to run the printer app code.
 
 ## Authors
 * Maxwell Gowan - gowan_maxwell@columbusstate.edu
