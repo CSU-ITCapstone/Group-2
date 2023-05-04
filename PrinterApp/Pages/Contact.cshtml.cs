@@ -12,7 +12,7 @@ namespace PrinterApp.Pages
 
         public void OnGet()
         {
-            Message = "Your contact page.";
+            Message = "Contact Information";
         }
     }
 }
