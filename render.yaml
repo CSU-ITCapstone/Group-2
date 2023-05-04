@@ -5,4 +5,3 @@ services:
     repo: https://github.com/CSU-ITCapstone/Group-2.git
     branch: main
     buildCommand: dotnet publish --configuration Release --output out
-    startCommand: dotnet out/PrinterApp.dll
