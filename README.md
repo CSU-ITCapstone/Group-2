@@ -12,16 +12,16 @@ The Printer Management Portal is a web-based application designed to streamline 
 ### Installing
 * Install Visual Studio here for your specific OS: https://visualstudio.microsoft.com/free-developer-offers/
 
-### Executing program
+### Visiting the Website Directly
+* Go to [Printer Application Login](https://printerapp20230504135825.azurewebsites.net/login)
+* Username: user1@example.com
+* Password: password1
+
+### Executing program via Visual Studio
 * Select the <> code dropdown and copy the HTTPS URL from the GitHub repository
 * Launch Visual Studio and select “Clone a repository” under the Get Started menu
 * Paste the GitHub repository HTTPS URL into the Repository location bar
 * Run the program by selecting the IIS Express green arrow in Visual Studio
-
-### OR
-* Go to [Printer Application Login](https://printerapp20230504135825.azurewebsites.net/login)
-* Username: user1@example.com
-* Password: password1
 
 ## Help
 Make sure you install the latest .Net Framework in order to run the printer app code.
