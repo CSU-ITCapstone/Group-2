@@ -2,36 +2,26 @@
 @model PrinterApp.Pages.Printers.IndexModel
 @{
 }
+
 @if (TempData["SuccessMessage"] != null)
 {
+    // If there is a success message stored in the TempData dictionary, display it in a success message alert
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>@TempData["SuccessMessage"]</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+
 <br />
 <h2>SGMC Printer List</h2>
+
+<!-- Create a link to the Create Razor Page to create a new printer -->
 <a class='btn btn-primary btn-sm' href='/Printers/Create'>New Printer</a>
-@*<form asp-page="./Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by name:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Search" class="btn btn-primary" /> |
-            <a asp-page="./Index">Back to full List</a>
-        </p>
-    </div>
-</form>*@
+
+<!-- Define a table to display the list of printers -->
 <table class="table">
     <thead>
-        @*<a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
-           asp-route-currentFilter="@Model.CurrentFilter">
-            @Html.DisplayNameFor(model => model.listPrinters[0].id)
-        </a>
-        <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
-           asp-route-currentFilter="@Model.CurrentFilter">
-            @Html.DisplayNameFor(model => model.listPrinters[0].location)
-        </a>*@
+        <!-- Define the column headers for the printer table -->
         <tr>
             <th>ID</th>
             <th>Asset No.</th>
@@ -48,6 +38,7 @@
         </tr>
     </thead>
     <tbody>
+        <!-- Loop through each printer in the list and display its information in a table row -->
         @foreach (var item in Model.listPrinters)
         {
             <tr>
@@ -63,6 +54,7 @@
                 <td>@item.mfgdate</td>
                 <td>@item.notes</td>
                 <td>
+                    <!-- Create links to the Edit and Delete Razor Pages for each printer -->
                     <a class="btn btn-primary btn-sm" href="/Printers/Edit?id=@item.id">Edit</a>
                     <a class="btn btn-primary btn-sm" href="/Printers/Delete?id=@item.id">Delete</a>
                 </td>
@@ -71,8 +63,10 @@
     </tbody>
 </table>
 
-
-
+<!--
+This code provides pagination functionality that is not currently in use in this view.
+It defines "Previous" and "Next" buttons that allow the user to navigate through the list of printers.
+-->
 @*@{
  var prevDisabled = !Model.listPrinters.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.listPrinters.HasNextPage ? "disabled" : "";
@@ -92,4 +86,3 @@
    class="btn btn-primary @nextDisabled">
     Next
 </a>*@
-

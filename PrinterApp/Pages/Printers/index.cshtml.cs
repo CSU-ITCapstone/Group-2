@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Import necessary libraries and namespaces
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,102 +10,50 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
+// Define the namespace and the IndexModel class within the PrinterApp.Pages.Printers namespace
 namespace PrinterApp.Pages.Printers
 {
+    // The IndexModel class inherits from the PageModel class, which is provided by the Razor Pages framework
     public class IndexModel : PageModel
     {
-        //private readonly PrinterContext _context;
-        //private readonly IConfiguration Configuration;
-
-        //public IndexModel(PrinterContext context, IConfiguration configuration)
-        //{
-        //    _context = context;
-        //    Configuration = configuration;
-        //}
-
-        //public string NameSort { get; set; }
-        //public string DateSort { get; set; }
-        //public string CurrentFilter { get; set; }
-        //public string CurrentSort { get; set; }
-
-        //public PaginatedList<PrinterList> Printers { get; set; }
-
-        //public async Task OnGetAsync(string sortOrder,
-        //    string currentFilter, string searchString, int? pageIndex)
-        //{
-        //    CurrentSort = sortOrder;
-        //    NameSort = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
-        //    DateSort = sortOrder == "Location" ? "loc_desc" : "Location";
-        //    if (searchString != null)
-        //    {
-        //        pageIndex = 1;
-        //    }
-        //    else
-        //    {
-        //        searchString = currentFilter;
-        //    }
-        //}
-
-        //public IList<PrinterList> printerLists { get; set; }
-
-        //public async Task OnGetAsync(string sortOrder, string searchString)
-        //{
-        //    // using System;
-        //    NameSort = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
-        //    DateSort = sortOrder == "Location" ? "loc_desc" : "Location";
-
-        //    IQueryable<PrinterList> printerLists = from s in _context.Printers
-        //                                     select s;
-        //    if (!String.IsNullOrEmpty(searchString))
-        //    {
-        //        printerLists = printerLists.Where(s => s.id.Contains(searchString)
-        //                               || s.hostdnsname.Contains(searchString));
-        //    }
-        //    switch (sortOrder)
-        //    {
-        //        case "id_desc":
-        //            printerLists = printerLists.OrderByDescending(s => s.id);
-        //            break;
-        //        case "Location":
-        //            printerLists = printerLists.OrderBy(s => s.location);
-        //            break;
-        //        case "loc_desc":
-        //            printerLists = printerLists.OrderByDescending(s => s.location);
-        //            break;
-        //        default:
-        //            printerLists = printerLists.OrderBy(s => s.id);
-        //            break;
-        //    }
-        //    var pageSize = Configuration.GetValue("PageSize", 4);
-        //    printerLists = await PaginatedList<PrinterList>.CreateAsync(
-        //        printerLists.AsNoTracking(), pageIndex ?? 1, pageSize);
-
-        //    Printers = await printerLists.AsNoTracking().ToListAsync();
+        // Declare a private ILogger instance to enable logging within the IndexModel class
         private readonly ILogger<IndexModel> _logger;
 
+        // Constructor for the IndexModel class that accepts an ILogger instance as a parameter
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
+
+        // Define a list of printers to store the results of the SQL query
         public List<PrinterList> listPrinters = new List<PrinterList>();
+
+        // OnGet() is the entry point for the Razor Page
         public void OnGet()
         {
             try
             {
+                // Define the connection string to the database
                 String connectionString = "Server=18.221.187.185;Initial Catalog=Printers;User ID=mgowan;Password=SecurePassword!123;MultipleActiveResultSets=true";
 
+                // Create a SQL connection and open it
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
+
+                    // Define the SQL query to select all printers from the database
                     String sql = "SELECT * FROM dbo.Printers";
+
+                    // Create a SQL command and execute the query
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+                            // Loop through the results of the query and create a PrinterList object for each printer
                             while (reader.Read())
                             {
                                 PrinterList printerList = new PrinterList();
-                                
+
                                 printerList.assetno = reader.GetString(0);
                                 printerList.ipaddress = reader.GetString(1);
                                 printerList.mac = reader.GetString(2);
@@ -116,8 +65,8 @@ namespace PrinterApp.Pages.Printers
                                 printerList.mfgdate = reader.GetString(8);
                                 printerList.notes = reader.GetString(9);
                                 printerList.id = "" + reader.GetInt32(10);
-                                
 
+                                // Add the PrinterList object to the list of printers
                                 listPrinters.Add(printerList);
                             }
                         }
@@ -126,12 +75,13 @@ namespace PrinterApp.Pages.Printers
             }
             catch (Exception ex)
             {
+                // Handle any exceptions that occur during the database connection
                 Console.WriteLine("Exception: " + ex.ToString());
             }
-
         }
     }
 
+    // Define the PrinterList class to store information about a printer
     public class PrinterList
     {
         public String id;

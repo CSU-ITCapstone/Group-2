@@ -6,6 +6,10 @@
 <br />
 <h2>New Printer</h2>
 
+@*
+*   If there is an error message, display it
+*@
+
 @if (!string.IsNullOrEmpty(Model.errorMessage))
 {
     <div class="alert alert-warning alert-dismissible show" role="alert">
@@ -14,7 +18,9 @@
     </div>
 }
 
-
+@*
+*   Form to create a new printer
+*@
 <form method="POST">
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Asset</label>
@@ -77,6 +83,9 @@
         </div>
     </div>
 
+    @*
+*   Buttons to submit or cancel
+    *@
     <div class="row mb-3">
         <div class="offset-sm-3 col-sm-3 d-grid">
             <button type="submit" class="btn btn-primary">Submit</button>
